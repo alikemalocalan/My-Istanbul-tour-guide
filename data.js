@@ -25,23 +25,23 @@ const routeData = {
   },
   days: {
     tr: {
-      day1: "1. Gün: Tarihi Yarımada & Klasik Lezzetler",
+      day1: "1. Gün: Tarihi Yarımada & Karaköy Lezzetleri",
       day2: "2. Gün: Taksim, Pera Müzesi, Galata & Boğaz",
       day3: "3. Gün: Anadolu Yakası & Kadıköy Keşfi"
     },
     en: {
-      day1: "Day 1: Historic Peninsula & Classic Eats",
+      day1: "Day 1: Historic Peninsula & Karaköy Flavors",
       day2: "Day 2: Taksim, Pera Museum, Galata & Bosphorus",
       day3: "Day 3: Asian Side & Kadıköy Exploration"
     },
     ru: {
-      day1: "День 1: Исторический полуостров и классика",
+      day1: "День 1: Исторический полуостров и Каракёй",
       day2: "День 2: Таксим, музей Пера, Галата и Босфор",
       day3: "День 3: Азиатская сторона и Кадыкёй"
     }
   },
   locations: [
-    // --- DAY 1: EUROPEAN SIDE HISTORIC PENINSULA ---
+    // --- DAY 1: EUROPEAN SIDE HISTORIC PENINSULA & KARAKÖY ---
     {
       id: 1,
       day: 1,
@@ -52,10 +52,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.0115195, 28.9833789],
       mapsUrl: "https://maps.google.com/?q=Topkapi+Palace+Museum+Istanbul",
-      image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Osmanlı Sultanlarının yaşadığı en görkemli saray müzesi. Hürrem Sultan'ın da yaşadığı sarayın Harem dairesini mutlaka görün!",
-      tipEn: "The most important Ottoman palace museum. Must-see: the famous Harem section where Hürrem Sultan lived!",
-      tipRu: "Самый важный музей османского дворца. Обязательно посетите знаменитый Гарем, где жила Хюррем Султан!",
+      image: "images/topkapi.jpg",
+      tipTr: "Osmanlı Sultanlarının yaşadığı en görkemli saray müzesi. Hürrem Sultan'ın da yaşadığı sarayın Harem dairesini mutlaka görün!\n🌳 NOT: Dış bahçelere ve 1. Avluya giriş tamamen ÜCRETSİZDİR.\n🎫 Müze Bilet Ücreti: Yabancı ziyaretçiler için €45 (Topkapı Sarayı + Harem + Aya İrini Karma Bilet).",
+      tipEn: "The most important Ottoman palace museum. Must-see: the famous Harem section where Hürrem Sultan lived!\n🌳 NOTE: Entry to outer gardens (Gülhane Park & 1st Courtyard) is FREE!\n🎫 Foreign Visitor Ticket: €45 (Combined Palace + Harem pass).",
+      tipRu: "Самый важный музей османского дворца. Обязательно посетите знаменитый Гарем, где жила Хюррем Султан!\n🌳 ПРИМЕЧАНИЕ: Вход во внешние сады — БЕСПЛАТНО!\n🎫 Билет для иностранных туристов: €45 (Дворец + Гарем).",
       transitToNext: {
         type: "walk",
         durationTr: "7-10 dk",
@@ -76,7 +76,7 @@ const routeData = {
       region: "europe",
       coordinates: [41.0139781, 28.9752568],
       mapsUrl: "https://maps.app.goo.gl/hze8JovKihongeYe9",
-      image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+      image: "images/cag_kebap.jpg",
       tipTr: "Topkapı'ya çok yakın, İstanbul'un en iyi Cağ Kebabı! ÖNEMLİ İPUCU: Kişi başı sadece 2 şiş sipariş edin. Yoğurt, salata teklif ederlerse reddedin, kebaba odaklanın. Doymazsanız yine söylersiniz.",
       tipEn: "Best Cağ Kebab in Istanbul, right near Topkapi! PRO TIP: Order only 2 skewers per person. Decline yogurt/salad extras - focus purely on kebab!",
       tipRu: "Лучший Джаг-кебаб в Стамбуле рядом с Топкапы! СОВЕТ: Заказывайте только 2 шампура на человека. Откажитесь от доп. салатов — сосредоточьтесь на кебабе!",
@@ -100,7 +100,7 @@ const routeData = {
       region: "europe",
       coordinates: [41.0146292, 28.9756182],
       mapsUrl: "https://maps.app.goo.gl/kuN6HEYffMAX39sv7",
-      image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80",
+      image: "images/hafiz_mustafa.jpg",
       tipTr: "Cağ kebaptan sonra Türk çayı ve buranın özel lezzeti 'Ala Trileçe' yemek için mükemmel durak! Ayrıca taze baklavası da meşhurdur.",
       tipEn: "Right after kebab, come here for Turkish tea and their signature 'Ala Trilece' dessert! Fresh baklava is also amazing.",
       tipRu: "Сразу после кебаба зайдите сюда на турецкий чай и фирменный десерт 'Ala Trilece'! Свежая баклава тоже великолепна.",
@@ -124,10 +124,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.008583, 28.980175],
       mapsUrl: "https://maps.google.com/?q=Hagia+Sophia+Grand+Mosque+Istanbul",
-      image: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Dünyanın en mimari harikası tarihi yapısı. Ayasofya giriş ücretlidir. Kubbesi ve mozaikleri büyüleyicidir.",
-      tipEn: "World famous architectural masterpiece. Hagia Sophia requires ticket entry. Its dome and mosaics are breathtaking.",
-      tipRu: "Всемирно известный архитектурный шедевр. Вход по билетам. Купол и мозаики завораживают.",
+      image: "images/ayasofya.jpg",
+      tipTr: "Dünyanın en mimari harikası tarihi yapısı. Kubbesi ve mozaikleri büyüleyicidir.\n🎫 Yabancı Ziyaretçi Bilet Ücreti: €25 (Üst galeri ziyaret alanı).",
+      tipEn: "World famous architectural masterpiece. Its dome and mosaics are breathtaking.\n🎫 Foreign Visitor Ticket: €25 (Upper gallery visiting area).",
+      tipRu: "Всемирно известный архитектурный шедевр. Вход по билетам. Купол и мозаики завораживают.\n🎫 Билет для иностранных туристов: €25 (Верхняя галерея).",
       transitToNext: {
         type: "walk",
         durationTr: "2 dk",
@@ -148,10 +148,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.005400, 28.976800],
       mapsUrl: "https://maps.google.com/?q=Blue+Mosque+Sultanahmet+Istanbul",
-      image: "https://images.unsplash.com/photo-1590077428593-a55bb07c4665?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Ayasofya'nın hemen karşısında yükselen 6 minareli muazzam Osmanlı eseri! Mavi İznik çinileriyle meşhurdur ve gezmesi ÜCRETSİZDİR.",
-      tipEn: "Magnificent 6-minaret Ottoman mosque right across Hagia Sophia! Famous for its blue Iznik tiles and FREE to enter.",
-      tipRu: "Великолепная мечеть с 6 минаретами напротив Ая-Софии! Известна своими синими изникскими изразцами. ВХОД БЕСПЛАТНЫЙ.",
+      image: "images/sultanahmet.jpg",
+      tipTr: "Ayasofya'nın hemen karşısında yükselen 6 minareli muazzam Osmanlı eseri! Mavi İznik çinileriyle meşhurdur.\n🎫 Giriş Ücreti: ÜCRETSİZ (Serbest ziyaret edilebilir).",
+      tipEn: "Magnificent 6-minaret Ottoman mosque right across Hagia Sophia! Famous for its blue Iznik tiles.\n🎫 Entry: FREE of charge.",
+      tipRu: "Великолепная мечеть с 6 минаретами напротив Ая-Софии! Известна своими синими изникскими изразцами.\n🎫 Вход: БЕСПЛАТНО.",
       transitToNext: {
         type: "tram",
         durationTr: "8 dk",
@@ -172,16 +172,40 @@ const routeData = {
       region: "europe",
       coordinates: [41.023250, 28.977200],
       mapsUrl: "https://maps.google.com/?q=Karakoy+Gulluoglu+Baklava+Istanbul",
-      image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80",
+      image: "images/gulluoglu.jpg",
       tipTr: "Baklavayı icat eden / dünyada baklavanın simgesi olan yer! Türkiye'nin en iyi, en kaliteli ve en havalı baklavacısıdır. Buraya uğramadan İstanbul turu tamamlanmaz.",
       tipEn: "The iconic place that invented / perfected baklava! The coolest and best baklava shop in all of Turkey. Absolutely mandatory stop!",
       tipRu: "Культовое место, где создали лучшую пахлаву! Самая лучшая и стильная кондитерская пахлавы в Турции.",
+      transitToNext: {
+        type: "walk",
+        durationTr: "2 dk",
+        durationEn: "2 mins",
+        durationRu: "2 мин",
+        descTr: "Karaköy sokakları içindeki Baltazar Burger'e yürüyün.",
+        descEn: "Walk into Karakoy streets to Baltazar Burger.",
+        descRu: "Пройдите по улочкам Каракёя к Baltazar Burger."
+      }
+    },
+    {
+      id: 7,
+      day: 1,
+      nameTr: "Baltazar Burger & Grill (Karaköy)",
+      nameEn: "Baltazar Burger & Grill (Karakoy)",
+      nameRu: "Baltazar Burger & Grill (Каракёй)",
+      category: "food",
+      region: "europe",
+      coordinates: [41.024100, 28.975800],
+      mapsUrl: "https://maps.google.com/?q=Baltazar+Karakoy+Istanbul",
+      image: "images/zapato_burger.jpg",
+      tipTr: "Karaköy'ün en popüler burger ve ızgara mekanı (Eski adıyla Zapato Burger)! Açık hava bahçesi ve leziz burgerleriyle Karaköy'ün vazgeçilmez mekanlarındandır.",
+      tipEn: "One of Karakoy's coolest burger & grill spots (formerly Zapato Burger)! Amazing outdoor garden and top-tier burgers in town.",
+      tipRu: "Одно из лучших заведений с бургерами и грилем в Каракёе (ранее Zapato Burger)! Отличный открытый сад и вкуснейшие бургеры.",
       transitToNext: null
     },
 
     // --- DAY 2: TAKSİM, PERA, GALATA, BEŞİKTAŞ & ORTAKÖY ---
     {
-      id: 7,
+      id: 8,
       day: 2,
       nameTr: "Taksim Meydanı & İstiklal Caddesi",
       nameEn: "Taksim Square & Istiklal Avenue",
@@ -190,7 +214,7 @@ const routeData = {
       region: "europe",
       coordinates: [41.036944, 28.985833],
       mapsUrl: "https://maps.google.com/?q=Taksim+Square+Istiklal+Street+Istanbul",
-      image: "https://images.unsplash.com/photo-1527838832700-54595d2445be?auto=format&fit=crop&w=800&q=80",
+      image: "images/taksim.jpg",
       tipTr: "2. Gün Başlıyor! İstanbul'un kalbi. Kırmızı nostaljik tramvayın geçtiği, tarihi pasajlar ve mağazalarla dolu hareketli cadde.",
       tipEn: "Day 2 Begins! The beating heart of Istanbul. Bustling pedestrian avenue with the iconic red nostalgic tram and historic passages.",
       tipRu: "День 2 начинается! Сердце Стамбула. Оживленная пешеходная улица со знаменитым красным ностальгическим трамваем.",
@@ -205,7 +229,7 @@ const routeData = {
       }
     },
     {
-      id: 8,
+      id: 9,
       day: 2,
       nameTr: "Pera Müzesi (Kaplumbağa Terbiyecisi)",
       nameEn: "Pera Museum (The Tortoise Trainer)",
@@ -214,10 +238,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.031389, 28.975278],
       mapsUrl: "https://maps.google.com/?q=Pera+Museum+Istanbul",
-      image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=800&q=80",
-      tipTr: "MÜZEYE GİDİLECEKSE EN DOĞRU ADRES! Türk resim sanatının başyapıtı olan Osman Hamdi Bey'in ünlü 'Kaplumbağa Terbiyecisi' tablosu buradadır. Oryantalist anlamda Türkiye'nin en önemli eseridir.",
-      tipEn: "THE MUST-VISIT ART MUSEUM! Home to Osman Hamdi Bey's world-famous masterpiece 'The Tortoise Trainer' - the most important Orientalist painting in Turkish history!",
-      tipRu: "ГЛАВНЫЙ ХУДОЖЕСТВЕННЫЙ МУЗЕЙ! Здесь находится шедевр Османа Хамди-бея «Дрессировщик черепах» — самая важная ориенталистская картина в истории Турции!",
+      image: "images/pera_museum.jpg",
+      tipTr: "MÜZEYE GİDİLECEKSE EN DOĞRU ADRES! Türk resim sanatının başyapıtı olan Osman Hamdi Bey'in ünlü 'Kaplumbağa Terbiyecisi' tablosu buradadır. Oryantalist anlamda Türkiye'nin en önemli eseridir.\n🎫 Yabancı Ziyaretçi Bilet Ücreti: ~€10.",
+      tipEn: "THE MUST-VISIT ART MUSEUM! Home to Osman Hamdi Bey's world-famous masterpiece 'The Tortoise Trainer' - the most important Orientalist painting in Turkish history!\n🎫 Foreign Visitor Ticket: ~€10.",
+      tipRu: "ГЛАВНЫЙ ХУДОЖЕСТВЕННЫЙ МУЗЕЙ! Здесь находится шедевр Османа Хамди-бея «Дрессировщик черепах» — самая важная ориенталистская картина в истории Турции!\n🎫 Билет для иностранных туристов: ~€10.",
       transitToNext: {
         type: "walk",
         durationTr: "7 dk",
@@ -229,7 +253,7 @@ const routeData = {
       }
     },
     {
-      id: 9,
+      id: 10,
       day: 2,
       nameTr: "Galata Kulesi",
       nameEn: "Galata Tower",
@@ -238,10 +262,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.0256687, 28.9741792],
       mapsUrl: "https://maps.google.com/?q=Galata+Tower+Istanbul",
-      image: "https://images.unsplash.com/photo-1527838832700-54595d2445be?auto=format&fit=crop&w=800&q=80",
-      tipTr: "İstanbul'un en simgesel tarihi kulesi. En tepesine çıkıp tüm şehri ve Boğazı panoramik olarak izleyin.",
-      tipEn: "Very old, gorgeous historic tower. Climb to the top for a stunning 360-degree view of Istanbul!",
-      tipRu: "Знаменитая историческая башня. Поднимитесь наверх за панорамным видом на Стамбул!",
+      image: "images/galata_tower.jpg",
+      tipTr: "İstanbul'un en simgesel tarihi kulesi. En tepesine çıkıp tüm şehri ve Boğazı panoramik olarak izleyin.\n🎫 Yabancı Ziyaretçi Bilet Ücreti: €30.",
+      tipEn: "Very old, gorgeous historic tower. Climb to the top for a stunning 360-degree view of Istanbul!\n🎫 Foreign Visitor Ticket: €30.",
+      tipRu: "Знаменитая историческая башня. Поднимитесь наверх за панорамным видом на Стамбул!\n🎫 Билет для иностранных туристов: €30.",
       transitToNext: {
         type: "walk",
         durationTr: "1 dk",
@@ -253,7 +277,7 @@ const routeData = {
       }
     },
     {
-      id: 10,
+      id: 11,
       day: 2,
       nameTr: "Helvacı Ali Galata",
       nameEn: "Helvaci Ali Galata",
@@ -262,7 +286,7 @@ const routeData = {
       region: "europe",
       coordinates: [41.027199, 28.972190],
       mapsUrl: "https://maps.app.goo.gl/yxyBddx4Y41u17no9",
-      image: "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
+      image: "images/helvaci_ali.jpg",
       tipTr: "Kuleyi gezdikten sonra mutlaka Antep fıstıklı sıcak dondurmalı helvasını deneyin! En sevilen lezzet duraklarından biridir.",
       tipEn: "Must-try warm pistachio helva over ice cream near Galata tower! Local favorite sweet treat.",
       tipRu: "Попробуйте теплую фисташковую хельву с мороженым около башни Галата!",
@@ -277,7 +301,7 @@ const routeData = {
       }
     },
     {
-      id: 11,
+      id: 12,
       day: 2,
       nameTr: "Dolmabahçe Sarayı Müzesi & Saat Kule Kafeterya",
       nameEn: "Dolmabahce Palace & Clock Tower Cafe",
@@ -286,10 +310,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.0376471, 28.9968587],
       mapsUrl: "https://maps.google.com/?q=Dolmabahce+Palace+Istanbul",
-      image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Son Osmanlı sarayı. Gezmeye vaktiniz olmasa dahi deniz kıyısındaki Saat Kule Kafeteryasında oturup Boğaz'ı seyredin.",
-      tipEn: "The grand last Ottoman palace. If short on time, relax at Saat Kule Cafe right on the Bosphorus shoreline.",
-      tipRu: "Роскошный последний дворец османов. Отдохните в кафе у Часовой башни прямо у пролива Босфор.",
+      image: "images/dolmabahce.jpg",
+      tipTr: "Son Osmanlı sarayı. Gezmeye vaktiniz olmasa dahi deniz kıyısındaki Saat Kule Kafeteryasında oturup Boğaz'ı seyredin.\n🎫 Yabancı Ziyaretçi Bilet Ücreti: €30 (Selamlık + Harem Tam Bilet).",
+      tipEn: "The grand last Ottoman palace. If short on time, relax at Saat Kule Cafe right on the Bosphorus shoreline.\n🎫 Foreign Visitor Ticket: €30 (Full Palace + Harem pass).",
+      tipRu: "Роскошный последний дворец османов. Отдохните в кафе у Часовой башни прямо у пролива Босфор.\n🎫 Билет для иностранных туристов: €30 (Дворец + Гарем).",
       transitToNext: {
         type: "walk",
         durationTr: "10 dk",
@@ -301,7 +325,7 @@ const routeData = {
       }
     },
     {
-      id: 12,
+      id: 13,
       day: 2,
       nameTr: "Balkanlar Lokantası (Beşiktaş)",
       nameEn: "Balkanlar Lokantasi (Beşiktaş)",
@@ -310,34 +334,10 @@ const routeData = {
       region: "europe",
       coordinates: [41.041800, 29.002800],
       mapsUrl: "https://maps.google.com/?q=Balkanlar+Lokantasi+Besiktas+Istanbul",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+      image: "images/balkanlar.jpg",
       tipTr: "Beşiktaş Çarşısı'nda çok uygun fiyatlı ve harika lezzette Türk ev yemekleri sunan geleneksel lokanta.",
       tipEn: "Incredibly cheap yet high-quality authentic Turkish home-cooked dishes in Beşiktaş.",
       tipRu: "Недорогой и очень вкусный ресторан домашней турецкой кухни в Бешикташе.",
-      transitToNext: {
-        type: "walk",
-        durationTr: "3 dk",
-        durationEn: "3 mins",
-        durationRu: "3 мин",
-        descTr: "Beşiktaş Şair Leyla Sokak yönüne yürüyün.",
-        descEn: "Walk towards Şair Leyla street in Besiktas.",
-        descRu: "Пройдите к улице Шаир Лейла."
-      }
-    },
-    {
-      id: 13,
-      day: 2,
-      nameTr: "Midyeci Ahmet (Beşiktaş)",
-      nameEn: "Midyeci Ahmet (Beşiktaş Mussels)",
-      nameRu: "Midyeci Ahmet (Мидии)",
-      category: "food",
-      region: "europe",
-      coordinates: [41.0416544, 29.0036932],
-      mapsUrl: "https://maps.google.com/?q=Midyeci+Ahmet+Besiktas+Istanbul",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Meşhur sokak midyecisi. GİTMEK ÇOK ŞART DEĞİL, ama midye dolmayı merak ediyorsanız yine de denemeye değer güzel bir durak.",
-      tipEn: "Famous stuffed mussels stop. NOT MANDATORY to visit, but worth trying if you are curious about street mussels!",
-      tipRu: "Знаменитое место с фаршированными мидиями. Посещение НЕ обязательно, но попробовать стоит!",
       transitToNext: {
         type: "walk",
         durationTr: "10 dk",
@@ -349,7 +349,7 @@ const routeData = {
       }
     },
     {
-      id: 14,
+      id: 15,
       day: 2,
       nameTr: "Ortaköy Meydanı & Camii",
       nameEn: "Ortakoy Square & Bosphorus View",
@@ -358,7 +358,7 @@ const routeData = {
       region: "europe",
       coordinates: [41.0475105, 29.0258132],
       mapsUrl: "https://maps.google.com/?q=Ortakoy+Square+Istanbul",
-      image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=800&q=80",
+      image: "images/ortakoy.jpg",
       tipTr: "Boğaz Köprüsü altında eşsiz manzara! Buradan Beşiktaş veya Karaköy iskelesine geçerek Kadıköy Vapuruna binin.",
       tipEn: "Famous scenic spot right under the Bosphorus Bridge. From here, head to ferry pier for Kadıköy boat ride.",
       tipRu: "Живописное место прямо под Босфорским мостом. Отсюда можно отправиться на паром до Кадыкёя.",
@@ -367,7 +367,7 @@ const routeData = {
 
     // --- DAY 3: ASIAN SIDE & KADIKÖY DISCOVERY ---
     {
-      id: 15,
+      id: 16,
       day: 3,
       nameTr: "Kadıköy Boğa Heykeli",
       nameEn: "Kadikoy Bull Statue",
@@ -376,7 +376,7 @@ const routeData = {
       region: "asia",
       coordinates: [40.990421, 29.0291723],
       mapsUrl: "https://maps.google.com/?q=Kadikoy+Boga+Heykeli+Istanbul",
-      image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80",
+      image: "images/kadikoy_boga.jpg",
       tipTr: "3. Gün Başlıyor! Kadıköy'ün en ikonik buluşma noktası. Önünde hatıra fotoğrafı çektirmek gelenektir.",
       tipEn: "Day 3 Begins! Signature meeting landmark of Kadikoy. Take a landmark photo in front of the bronze bull!",
       tipRu: "День 3 начинается! Самый знаменитый ориентир Кадыкёя. Сделайте фото у бронзового быка!",
@@ -391,19 +391,19 @@ const routeData = {
       }
     },
     {
-      id: 16,
+      id: 17,
       day: 3,
-      nameTr: "Kadıköy Kahvaltı Durağı (Cafe Jêle / Müjgan / Luşnika)",
-      nameEn: "Kadikoy Breakfast Spots (Cafe Jêle / Müjgan / Luşnika)",
-      nameRu: "Завтрак в Кадыкёе (Cafe Jêle / Müjgan / Luşnika)",
+      nameTr: "Luşnika Cafe (Kadıköy Kahvaltı Durağı)",
+      nameEn: "Luşnika Cafe (Kadikoy Breakfast Spot)",
+      nameRu: "Luşnika Cafe (Завтрак в Кадыкёе)",
       category: "food",
       region: "asia",
-      coordinates: [40.9891887, 29.0302677],
-      mapsUrl: "https://maps.google.com/?q=Cafe+Jele+Kadikoy+Istanbul",
-      image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Zengin Serpme Türk Kahvaltısı: Cafe Jêle (modern), Müjgan Yeldeğirmeni (sıcak atmosfer) ve Luşnika Cafe (son derece uygun fiyatlı ve kaliteli).",
-      tipEn: "Rich Turkish Breakfast options: Cafe Jêle (modern), Müjgan Yeldeğirmeni (cozy), and Luşnika Cafe (budget friendly & high quality).",
-      tipRu: "Отличный турецкий завтрак: Cafe Jêle (современное), Müjgan (уютное), Luşnika (доступное и качественное).",
+      coordinates: [40.990277, 29.025690],
+      mapsUrl: "https://maps.google.com/?q=Lusnika+Cafe+Kadikoy",
+      image: "images/kadikoy_breakfast.jpg",
+      tipTr: "Zengin Serpme Türk Kahvaltısı için son derece uygun fiyatlı ve kaliteli bir adres.",
+      tipEn: "An excellent, budget-friendly and high-quality spot for a rich traditional Turkish Breakfast.",
+      tipRu: "Отличное, доступное и качественное место для традиционного турецкого завтрака.",
       transitToNext: {
         type: "walk",
         durationTr: "4 dk",
@@ -415,7 +415,7 @@ const routeData = {
       }
     },
     {
-      id: 17,
+      id: 18,
       day: 3,
       nameTr: "Tatar Salim Döner (Kadıköy)",
       nameEn: "Tatar Salim Doner (Kadikoy)",
@@ -424,7 +424,7 @@ const routeData = {
       region: "asia",
       coordinates: [40.988500, 29.027800],
       mapsUrl: "https://maps.google.com/?q=Tatar+Salim+Doner+Kadikoy+Istanbul",
-      image: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80",
+      image: "images/tatar_salim.jpg",
       tipTr: "MÜKEMMEL DÖNER DURAĞI! İstanbul'un tartışmasız EN İYİ DÖNERCİSİ. Gerçek yaprak et döneri burada yemelisiniz.",
       tipEn: "THE BEST DONER KEBAB IN ISTANBUL! Authentic premium leaf meat doner. Absolutely world-class quality!",
       tipRu: "ЛУЧШИЙ ДОНЕР В СТАМБУЛЕ! Настоящий премиальный мясной донер. Обязательно попробуйте!",
@@ -439,7 +439,7 @@ const routeData = {
       }
     },
     {
-      id: 18,
+      id: 19,
       day: 3,
       nameTr: "Yanyalı Fehmi Lokantası",
       nameEn: "Yanyali Fehmi Lokantasi",
@@ -448,7 +448,7 @@ const routeData = {
       region: "asia",
       coordinates: [40.9907688, 29.0255674],
       mapsUrl: "https://maps.app.goo.gl/852a787003a6d728",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+      image: "images/yanyali_fehmi.jpg",
       tipTr: "Tarihi Kadıköy Çarşısı'nın tam içinde yer alır. Biraz pahalıdır ama ÇOK KALİTELİ geleneksel Türk ve Osmanlı ev yemekleri sunar. Yemeğin üstüne çay ile fırın Sütlaç yemelisiniz!",
       tipEn: "Located right inside Kadikoy Bazaar. A bit pricey, but VERY HIGH QUALITY Ottoman & Turkish home cooking. Try their baked Sütlaç dessert with tea!",
       tipRu: "Прямо на рынке Кадыкёй. Немного дорого, но ОЧЕНЬ КАЧЕСТВЕННАЯ османская домашняя кухня. Попробуйте рисовый пудинг Сютлач!",
@@ -463,7 +463,7 @@ const routeData = {
       }
     },
     {
-      id: 19,
+      id: 20,
       day: 3,
       nameTr: "Kadıköy Midyecisi",
       nameEn: "Kadikoy Midyecisi",
@@ -472,34 +472,10 @@ const routeData = {
       region: "asia",
       coordinates: [40.9880334, 29.0242096],
       mapsUrl: "https://maps.google.com/?q=Kadikoy+Midyecisi+Istanbul",
-      image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+      image: "images/kadikoy_midye.jpg",
       tipTr: "Anadolu yakasında midye dolma durağı. Gitmek ÇOK ŞART DEĞİL, ama midye seviyorsanız yine de denenebilir.",
       tipEn: "Midye dolma option on Asian side. NOT MANDATORY, but a good quick stop if you enjoy stuffed mussels.",
       tipRu: "Мидии в Кадыкёе. НЕ обязательно, но можно зайти, если любите фаршированные мидии.",
-      transitToNext: {
-        type: "walk",
-        durationTr: "4 dk",
-        durationEn: "4 mins",
-        durationRu: "4 мин",
-        descTr: "Moda şarap barına doğru ilerleyin.",
-        descEn: "Walk towards Moda wine bar.",
-        descRu: "Пройдите к винному бару в Моде."
-      }
-    },
-    {
-      id: 20,
-      day: 3,
-      nameTr: "WAYANA Wine Bar",
-      nameEn: "WAYANA Wine Bar",
-      nameRu: "WAYANA Wine Bar",
-      category: "nightlife",
-      region: "asia",
-      coordinates: [40.9812714, 29.0227071],
-      mapsUrl: "https://maps.google.com/?q=WAYANA+Wine+Bar+Kadikoy",
-      image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Biraz pahalı bir şarap barıdır. Başka yer bulunamazsa veya özel şarap denemek isterseniz son tercih olarak düşünülebilir.",
-      tipEn: "A bit expensive wine bar. Can be a last choice / alternative if you can't find another spot or want boutique wines.",
-      tipRu: "Немного дорогой винный бар. Может быть запасным вариантом, если не нашли другое место.",
       transitToNext: {
         type: "walk",
         durationTr: "3 dk",
@@ -511,7 +487,7 @@ const routeData = {
       }
     },
     {
-      id: 21,
+      id: 22,
       day: 3,
       nameTr: "Güneşin Sofrası Meyhane",
       nameEn: "Gunesin Sofrasi Traditional Taverna",
@@ -520,7 +496,7 @@ const routeData = {
       region: "asia",
       coordinates: [40.9898532, 29.0301897],
       mapsUrl: "https://maps.google.com/?q=Gunesin+Sofrasi+Meyhane+Kadikoy",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80",
+      image: "images/gunesin_sofrasi.jpg",
       tipTr: "Kadıköy'deki en sevdiğim geleneksel Türk Meyhanesi! Mezeleri harikadır. Cumartesi akşamları dolu olabilir.",
       tipEn: "My favorite traditional Turkish Meyhane (taverna) in Kadikoy! Fantastic cold & warm mezes.",
       tipRu: "Моя любимая традиционная турецкая мейхане (таверна) в Кадыкёе! Отличные закуски мезе.",
@@ -535,7 +511,7 @@ const routeData = {
       }
     },
     {
-      id: 22,
+      id: 23,
       day: 3,
       nameTr: "Kuzen Beer Cafe / Kuzen Sahne",
       nameEn: "Kuzen Beer Cafe (Live Music Cellar)",
@@ -544,7 +520,7 @@ const routeData = {
       region: "asia",
       coordinates: [40.988888, 29.0244319],
       mapsUrl: "https://maps.google.com/?q=Kuzen+Beer+Cafe+Kadikoy",
-      image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80",
+      image: "images/kuzen_bar.jpg",
       tipTr: "Mahzen katındaki harika atmosferi, canlı grup performansları ve bira çeşitleriyle Kadıköy gecelerinin vazgeçilmezi.",
       tipEn: "Awesome cellar vibe featuring live band performances and great draft beer selection.",
       tipRu: "Отличный подвальный бар с живой музыкой и большим выбором пива.",
@@ -559,7 +535,7 @@ const routeData = {
       }
     },
     {
-      id: 23,
+      id: 24,
       day: 3,
       nameTr: "Fül Fül Çorba",
       nameEn: "Ful Ful Corba (Soup Experience)",
@@ -568,34 +544,10 @@ const routeData = {
       region: "asia",
       coordinates: [40.993864, 29.036384],
       mapsUrl: "https://maps.google.com/?q=Ful+Ful+Corba+Kadikoy",
-      image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
+      image: "images/ful_ful.jpg",
       tipTr: "GELENEKSEL DENEYİM MEKANI! Farklı Türk çorba çeşitlerini tadabileceğiniz harika bir kültür deneyim mekanıdır.",
       tipEn: "A TRULY UNIQUE EXPERIENCE VENUE! Great place to sample authentic diverse Turkish soup varieties.",
       tipRu: "УНИКАЛЬНОЕ МЕСТО ДЛЯ КУЛИНАРНОГО ОПЫТА! Отличный шанс попробовать разные виды традиционных турецких супов.",
-      transitToNext: {
-        type: "walk",
-        durationTr: "2 dk",
-        durationEn: "2 mins",
-        durationRu: "2 мин",
-        descTr: "Kadıköy Barlar Sokağı içine girin.",
-        descEn: "Walk into Kadikoy Bar Street.",
-        descRu: "Зайдите на улицу баров Кадыкёя."
-      }
-    },
-    {
-      id: 24,
-      day: 3,
-      nameTr: "Kadıköy Barlar Sokağı & Gece Hayatı",
-      nameEn: "Kadikoy Bar Street & Nightlife Tips",
-      nameRu: "Улица баров Кадыкёй и ночная жизнь",
-      category: "nightlife",
-      region: "asia",
-      coordinates: [40.987500, 29.026000],
-      mapsUrl: "https://maps.google.com/?q=Kadikoy+Barlar+Sokagi+Istanbul",
-      image: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&w=800&q=80",
-      tipTr: "Kadıköy gece hayatının kalbi. UYARI: Bir mekana girmeden önce mutlaka Google Harita yorumlarını okuyun, toksik mekanlardan kaçının.",
-      tipEn: "Heart of Kadikoy nightlife. NOTE: Read Google Maps reviews before entering any bar to avoid toxic spots.",
-      tipRu: "Центр ночной жизни Кадыкёя. СОВЕТ: Обязательно читайте отзывы на Google Maps перед входом в бар.",
       transitToNext: null
     }
   ]
