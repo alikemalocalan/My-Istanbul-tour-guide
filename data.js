@@ -25,19 +25,28 @@ const routeData = {
   },
   days: {
     tr: {
-      day1: "1. Gün: Tarihi Yarımada & Karaköy Lezzetleri",
-      day2: "2. Gün: Taksim, Pera Müzesi, Galata & Boğaz",
-      day3: "3. Gün: Anadolu Yakası & Kadıköy Keşfi"
+      tourist: "🏛️ Turist Modu",
+      day1: "1. Gün: Fatih & Tarihi Yarımada",
+      day2: "2. Gün: Taksim, Pera & Beşiktaş - Boğaz",
+      day3: "3. Gün: Anadolu Yakası & Kadıköy Keşfi",
+      returning: "🔄 2. & 3. Sefer Gelenler",
+      local: "☕ İstanbullu Gibi (Lokal Rota)"
     },
     en: {
-      day1: "Day 1: Historic Peninsula & Karaköy Flavors",
-      day2: "Day 2: Taksim, Pera Museum, Galata & Bosphorus",
-      day3: "Day 3: Asian Side & Kadıköy Exploration"
+      tourist: "🏛️ Tourist Mode",
+      day1: "Day 1: Fatih & Historic Peninsula",
+      day2: "Day 2: Taksim, Pera & Besiktas - Bosphorus",
+      day3: "Day 3: Asian Side & Kadıköy Exploration",
+      returning: "🔄 Returning Travelers (2nd/3rd Visit)",
+      local: "☕ Feel Like a Local (Local Route)"
     },
     ru: {
-      day1: "День 1: Исторический полуостров и Каракёй",
-      day2: "День 2: Таксим, музей Пера, Галата и Босфор",
-      day3: "День 3: Азиатская сторона и Кадыкёй"
+      tourist: "🏛️ Туристический режим",
+      day1: "День 1: Фатих и Исторический полуостров",
+      day2: "День 2: Таксим, Пера и Бешикташ - Босфор",
+      day3: "День 3: Азиатская сторона и Кадыкёй",
+      returning: "🔄 Для тех, кто в Стамбуле 2-3 раз",
+      local: "☕ Стамбул глазами местного"
     }
   },
   locations: [

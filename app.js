@@ -1,7 +1,8 @@
 // Application Logic for Istanbul Curated Sequential Route (TR, EN, RU)
 let currentLang = localStorage.getItem('istanbul_route_lang') || 'tr';
 let currentFilter = 'all';
-let currentDay = 'all';
+let currentMode = 'tourist'; // 'tourist', 'returning', 'local'
+let currentDay = 'all'; // 'all', '1', '2', '3'
 let searchQuery = '';
 
 let map = null;
@@ -51,7 +52,8 @@ function applyTheme(theme, isManual = true) {
 }
 
 function toggleTheme() {
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  const isDark = document.documentElement.classList.contains('dark');
+  const newTheme = isDark ? 'light' : 'dark';
   applyTheme(newTheme, true);
 }
 
@@ -96,6 +98,9 @@ function updateMapMarkersAndLines() {
 
   routeData.locations.forEach(loc => {
     if (!matchesFilter(loc)) return;
+
+    // Show ONLY historic & touristic sight-seeing spots on the map (exclude food & nightlife)
+    if (loc.category !== 'historic') return;
 
     const [lat, lng] = loc.coordinates;
     points.push([lat, lng]);
@@ -166,6 +171,9 @@ function updateMapMarkersAndLines() {
 
 // Check if location matches current filters and search query
 function matchesFilter(loc) {
+  if (currentMode !== 'tourist') {
+    return false;
+  }
   if (currentDay !== 'all' && loc.day !== parseInt(currentDay)) {
     return false;
   }
@@ -200,12 +208,42 @@ function initEventListeners() {
   document.getElementById('btn-en')?.addEventListener('click', () => setLanguage('en'));
   document.getElementById('btn-ru')?.addEventListener('click', () => setLanguage('ru'));
 
-  // Day Selector Buttons
+  // Traveler Mode Buttons (.mode-btn)
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const clickedBtn = e.target.closest('.mode-btn');
+      if (!clickedBtn) return;
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.remove('active', 'bg-amber-500/20', 'text-amber-800', 'dark:text-amber-200');
+        b.classList.add('bg-white/50', 'dark:bg-slate-900/50', 'text-slate-700', 'dark:text-slate-300');
+      });
+      clickedBtn.classList.add('active', 'bg-amber-500/20', 'text-amber-800', 'dark:text-amber-200');
+      clickedBtn.classList.remove('bg-white/50', 'dark:bg-slate-900/50', 'text-slate-700', 'dark:text-slate-300');
+      currentMode = clickedBtn.dataset.mode || 'tourist';
+      renderCards();
+      updateMapMarkersAndLines();
+    });
+  });
+
+  // Day Selector Buttons (.day-btn)
   document.querySelectorAll('.day-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      const clickedBtn = e.target.closest('.day-btn');
+      if (!clickedBtn) return;
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      currentDay = e.target.dataset.day || 'all';
+      clickedBtn.classList.add('active');
+      currentDay = clickedBtn.dataset.day || 'all';
+
+      // Automatically activate Tourist Mode if a day button is clicked!
+      if (currentMode !== 'tourist') {
+        currentMode = 'tourist';
+        document.querySelectorAll('.mode-btn').forEach(b => {
+          b.classList.remove('active', 'bg-amber-500/20', 'text-amber-800', 'dark:text-amber-200');
+          b.classList.add('bg-white/50', 'dark:bg-slate-900/50', 'text-slate-700', 'dark:text-slate-300');
+        });
+        document.getElementById('mode-tourist')?.classList.add('active', 'bg-amber-500/20', 'text-amber-800', 'dark:text-amber-200');
+      }
+
       renderCards();
       updateMapMarkersAndLines();
     });
@@ -278,8 +316,13 @@ function renderHeaderAndModal() {
   setText('tips-btn-text', isTr ? '💡 İstanbulkart & Ulaşım İpuçları' : (isRu ? '💡 Транспорт и советы' : '💡 Transport & Local Tips'));
   setText('tips-btn-text-compact', isTr ? '💡 İpuçları' : (isRu ? '💡 Советы' : '💡 Local Tips'));
 
-  // Day Selector Labels
+  // Traveler Mode & Day Selector Labels
   const totalCount = routeData.locations.length;
+  setText('traveler-mode-label', isTr ? '🎯 GEZGİN MODLARI:' : (isRu ? '🎯 РЕЖИМЫ ПУТЕШЕСТВЕННИКА:' : '🎯 TRAVELER MODES:'));
+  setText('mode-tourist', daysText.tourist);
+  setText('mode-returning', daysText.returning);
+  setText('mode-local', daysText.local);
+
   setText('day-select-label', isTr ? '🗓️ GÜN SEÇİMİ:' : (isRu ? '🗓️ ВЫБОР ДНЯ:' : '🗓️ SELECT DAY:'));
   setText('day-all', isTr ? `Tüm Günler (${totalCount} Durak)` : (isRu ? `Все дни (${totalCount})` : `All Days (${totalCount})`));
   setText('day-1', daysText.day1);
@@ -311,12 +354,55 @@ function renderCards() {
   const container = document.getElementById('cards-container');
   if (!container) return;
 
+  const isTr = currentLang === 'tr';
+  const isRu = currentLang === 'ru';
+
+  // Handle Returning Traveler Draft Mode (2. & 3. Sefer Gelenler)
+  if (currentMode === 'returning') {
+    container.innerHTML = `
+      <div class="text-center py-12 px-6 bg-amber-500/10 dark:bg-amber-500/10 border-2 border-dashed border-amber-500/40 rounded-3xl backdrop-blur-md">
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center text-3xl mx-auto mb-4">
+          🔄
+        </div>
+        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-2">
+          ${isTr ? '2. & 3. Sefer Gelenler Rotaları (Hazırlık Aşamasında)' : (isRu ? 'Маршруты для 2-3 визита (В разработке)' : 'Returning Traveler Routes (Under Preparation)')}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed font-medium">
+          ${isTr 
+            ? 'İstanbul’a tekrar gelen gezginler için alternatif gizli lezzet ve kültür rotaları daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
+            : (isRu ? 'Альтернативные маршруты для повторных визитов скоро будут наполнены!' : 'Alternative hidden gems and returning traveler routes will be populated soon!')}
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  // Handle "Feel Like a Local" Draft Mode (İstanbullu Gibi)
+  if (currentMode === 'local') {
+    container.innerHTML = `
+      <div class="text-center py-12 px-6 bg-sky-500/10 dark:bg-sky-500/10 border-2 border-dashed border-sky-500/40 rounded-3xl backdrop-blur-md">
+        <div class="w-14 h-14 rounded-2xl bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-3xl mx-auto mb-4">
+          ☕
+        </div>
+        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white mb-2">
+          ${isTr ? 'İstanbullu Gibi Hisset (Lokal Rota Hazırlık Aşamasında)' : (isRu ? 'Живи как местный (В разработке)' : 'Feel Like a Local (Under Preparation)')}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed font-medium">
+          ${isTr 
+            ? 'Turist kalabalıklarından uzak, gerçek bir İstanbullu gibi mahalle kahveleri ve lokal duraklar daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
+            : (isRu ? 'Настоящие локальные места без туристов скоро будут заполнены!' : 'Local spots away from tourist crowds will be populated soon!')}
+        </p>
+      </div>
+    `;
+    return;
+  }
+
   const filteredLocations = routeData.locations.filter(matchesFilter);
 
   if (filteredLocations.length === 0) {
-    const noResultsText = currentLang === 'tr' 
+    const noResultsText = isTr 
       ? 'Aranan kriterlere uygun yer bulunamadı.' 
-      : (currentLang === 'ru' ? 'Места не найдены.' : 'No locations found matching your filter.');
+      : (isRu ? 'Места не найдены.' : 'No locations found matching your filter.');
     container.innerHTML = `
       <div class="text-center py-12 px-4 text-slate-500 dark:text-slate-400 bg-white/50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800">
         <h3 class="text-base font-semibold">${noResultsText}</h3>
