@@ -85,6 +85,8 @@ function initMap() {
   updateMapMarkersAndLines();
 }
 
+let routePolylines = [];
+
 // Update Map Markers & Transit Lines
 function updateMapMarkersAndLines() {
   if (!map) return;
@@ -92,9 +94,14 @@ function updateMapMarkersAndLines() {
   // Clear existing markers & polylines
   Object.values(markersMap).forEach(marker => map.removeLayer(marker));
   markersMap = {};
-  if (routePolyline) map.removeLayer(routePolyline);
 
-  const points = [];
+  if (routePolylines && routePolylines.length > 0) {
+    routePolylines.forEach(pl => map.removeLayer(pl));
+  }
+  routePolylines = [];
+
+  const dayPoints = { 1: [], 2: [], 3: [] };
+  const dayCounters = { 1: 0, 2: 0, 3: 0 };
 
   routeData.locations.forEach(loc => {
     if (!matchesFilter(loc)) return;
@@ -103,21 +110,33 @@ function updateMapMarkersAndLines() {
     if (loc.category !== 'historic') return;
 
     const [lat, lng] = loc.coordinates;
-    points.push([lat, lng]);
+    if (dayPoints[loc.day]) {
+      dayPoints[loc.day].push([lat, lng]);
+    }
+
+    // Day-specific sequential stop number (1, 2, 3... for each day)
+    dayCounters[loc.day] = (dayCounters[loc.day] || 0) + 1;
+    const dayStopIndex = dayCounters[loc.day];
 
     // Custom Pin Colors based on Day
-    let pinColor = '#00b4d8';
-    if (loc.day === 2) pinColor = '#a855f7';
-    if (loc.day === 3) pinColor = '#f77f00';
+    let pinColor = '#0284c7'; // Day 1: Sky Blue
+    let shadowColor = 'rgba(2, 132, 199, 0.45)';
+    if (loc.day === 2) {
+      pinColor = '#9333ea'; // Day 2: Royal Purple
+      shadowColor = 'rgba(147, 51, 234, 0.45)';
+    } else if (loc.day === 3) {
+      pinColor = '#f59e0b'; // Day 3: Amber Orange
+      shadowColor = 'rgba(245, 158, 11, 0.45)';
+    }
 
     const customIcon = L.divIcon({
       className: 'custom-map-pin',
       html: `
         <div style="
           background: ${pinColor};
-          color: #fff;
+          color: #ffffff;
           font-weight: 800;
-          font-size: 12px;
+          font-size: 13px;
           width: 32px;
           height: 32px;
           border-radius: 50%;
@@ -125,10 +144,11 @@ function updateMapMarkersAndLines() {
           align-items: center;
           justify-content: center;
           border: 2px solid #ffffff;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+          box-shadow: 0 4px 12px ${shadowColor};
           cursor: pointer;
+          transition: transform 0.2s ease;
         ">
-          ${loc.id}
+          ${dayStopIndex}
         </div>
       `,
       iconSize: [32, 32],
@@ -139,16 +159,22 @@ function updateMapMarkersAndLines() {
 
     const title = currentLang === 'tr' ? loc.nameTr : (currentLang === 'ru' ? loc.nameRu : loc.nameEn);
     const tip = currentLang === 'tr' ? loc.tipTr : (currentLang === 'ru' ? loc.tipRu : loc.tipEn);
-    
+    const dayLabel = currentLang === 'tr'
+      ? `${loc.day}. Gün • ${dayStopIndex}. Durak`
+      : (currentLang === 'ru' ? `День ${loc.day} • Остановка ${dayStopIndex}` : `Day ${loc.day} • Stop #${dayStopIndex}`);
+
     const popupContent = `
-      <div style="padding: 4px; font-family: sans-serif;">
+      <div style="padding: 6px; font-family: sans-serif;">
+        <span style="display: inline-block; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; background: ${pinColor}; color: #fff; margin-bottom: 6px;">
+          ${dayLabel}
+        </span>
         <h4 style="margin: 0 0 4px 0; font-weight: 800; font-size: 14px;">
-          #${loc.id} ${title}
+          #${dayStopIndex} ${title}
         </h4>
         <p style="margin: 0 0 8px 0; font-size: 12px; opacity: 0.85;">
           ${tip.substring(0, 75)}...
         </p>
-        <a href="${loc.mapsUrl}" target="_blank" style="font-size: 11px; color: #00b4d8; font-weight: bold;">
+        <a href="${loc.mapsUrl}" target="_blank" style="font-size: 11px; color: ${pinColor}; font-weight: bold;">
           🗺️ Google Maps ↗
         </a>
       </div>
@@ -158,15 +184,25 @@ function updateMapMarkersAndLines() {
     markersMap[loc.id] = marker;
   });
 
-  // Draw connecting line between sequential spots
-  if (points.length > 1) {
-    routePolyline = L.polyline(points, {
-      color: '#00b4d8',
-      weight: 3,
-      opacity: 0.7,
-      dashArray: '8, 8'
-    }).addTo(map);
-  }
+  // Draw day-colored connecting lines for sequential spots
+  const dayColors = {
+    1: '#0284c7', // Day 1: Sky Blue
+    2: '#9333ea', // Day 2: Royal Purple
+    3: '#f59e0b'  // Day 3: Amber Orange
+  };
+
+  [1, 2, 3].forEach(d => {
+    const points = dayPoints[d];
+    if (points && points.length > 1) {
+      const pl = L.polyline(points, {
+        color: dayColors[d],
+        weight: 3.5,
+        opacity: 0.8,
+        dashArray: '6, 8'
+      }).addTo(map);
+      routePolylines.push(pl);
+    }
+  });
 }
 
 // Check if location matches current filters and search query
@@ -188,11 +224,11 @@ function matchesFilter(loc) {
   if (searchQuery.trim() !== '') {
     const q = searchQuery.toLowerCase();
     const nameMatch = (loc.nameTr && loc.nameTr.toLowerCase().includes(q)) ||
-                      (loc.nameEn && loc.nameEn.toLowerCase().includes(q)) ||
-                      (loc.nameRu && loc.nameRu.toLowerCase().includes(q));
+      (loc.nameEn && loc.nameEn.toLowerCase().includes(q)) ||
+      (loc.nameRu && loc.nameRu.toLowerCase().includes(q));
     const tipMatch = (loc.tipTr && loc.tipTr.toLowerCase().includes(q)) ||
-                     (loc.tipEn && loc.tipEn.toLowerCase().includes(q)) ||
-                     (loc.tipRu && loc.tipRu.toLowerCase().includes(q));
+      (loc.tipEn && loc.tipEn.toLowerCase().includes(q)) ||
+      (loc.tipRu && loc.tipRu.toLowerCase().includes(q));
     if (!nameMatch && !tipMatch) return false;
   }
   return true;
@@ -309,10 +345,10 @@ function renderHeaderAndModal() {
   setText('brand-title', isTr ? 'İstanbul Gezi Rotalarım' : (isRu ? 'Мои маршруты по Стамбулу' : 'My Istanbul Curated Route'));
   setText('hero-badge', isTr ? '✨ TOPLU TAŞIMA İLE ADIM ADIM İSTANBUL ✨' : (isRu ? '✨ СТАМБУЛ ШАГ ЗА ШАГОМ НА ТРАНСПОРТЕ ✨' : '✨ STEP-BY-STEP PUBLIC TRANSPORT ROUTE ✨'));
   setText('hero-title', isTr ? 'İstanbul Sıralı Gezi Rehberi' : (isRu ? 'Путеводитель по Стамбулу' : 'Istanbul Sequential Travel Guide'));
-  setText('hero-desc', isTr 
+  setText('hero-desc', isTr
     ? 'Benim bizzat gezdiğim yerler, en sevdiğim lezzetler, tarihi saraylar ve ipuçları! Harita ve sırayla adım adım ulaşım rehberi eşliğinde keyifle gezin.'
     : (isRu ? 'Мои любимые места, дворцы, блюда и советы! Исследуйте город по карте и пошаговому маршруту.' : 'Handpicked places, my favorite eats, historic palaces, and local insider tips! Follow step-by-step with public transport guide.'));
-  
+
   setText('tips-btn-text', isTr ? '💡 İstanbulkart & Ulaşım İpuçları' : (isRu ? '💡 Транспорт и советы' : '💡 Transport & Local Tips'));
   setText('tips-btn-text-compact', isTr ? '💡 İpuçları' : (isRu ? '💡 Советы' : '💡 Local Tips'));
 
@@ -342,7 +378,7 @@ function renderHeaderAndModal() {
   setText('modal-istanbulkart-body', tips.istanbulkartBody);
   setText('modal-taxi-title', tips.taxiTitle);
   setText('modal-taxi-body', tips.taxiBody);
-  
+
   const appLink = document.getElementById('modal-app-link');
   if (appLink) {
     appLink.innerText = tips.appLinkText;
@@ -368,9 +404,9 @@ function renderCards() {
           ${isTr ? '2. & 3. Sefer Gelenler Rotaları (Hazırlık Aşamasında)' : (isRu ? 'Маршруты для 2-3 визита (В разработке)' : 'Returning Traveler Routes (Under Preparation)')}
         </h3>
         <p class="text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed font-medium">
-          ${isTr 
-            ? 'İstanbul’a tekrar gelen gezginler için alternatif gizli lezzet ve kültür rotaları daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
-            : (isRu ? 'Альтернативные маршруты для повторных визитов скоро будут наполнены!' : 'Alternative hidden gems and returning traveler routes will be populated soon!')}
+          ${isTr
+        ? 'İstanbul’a tekrar gelen gezginler için alternatif gizli lezzet ve kültür rotaları daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
+        : (isRu ? 'Альтернативные маршруты для повторных визитов скоро будут наполнены!' : 'Alternative hidden gems and returning traveler routes will be populated soon!')}
         </p>
       </div>
     `;
@@ -388,9 +424,9 @@ function renderCards() {
           ${isTr ? 'İstanbullu Gibi Hisset (Lokal Rota Hazırlık Aşamasında)' : (isRu ? 'Живи как местный (В разработке)' : 'Feel Like a Local (Under Preparation)')}
         </h3>
         <p class="text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed font-medium">
-          ${isTr 
-            ? 'Turist kalabalıklarından uzak, gerçek bir İstanbullu gibi mahalle kahveleri ve lokal duraklar daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
-            : (isRu ? 'Настоящие локальные места без туристов скоро будут заполнены!' : 'Local spots away from tourist crowds will be populated soon!')}
+          ${isTr
+        ? 'Turist kalabalıklarından uzak, gerçek bir İstanbullu gibi mahalle kahveleri ve lokal duraklar daha sonra tarafınızca doldurulmak üzere taslak olarak eklendi!'
+        : (isRu ? 'Настоящие локальные места без туристов скоро будут заполнены!' : 'Local spots away from tourist crowds will be populated soon!')}
         </p>
       </div>
     `;
@@ -400,8 +436,8 @@ function renderCards() {
   const filteredLocations = routeData.locations.filter(matchesFilter);
 
   if (filteredLocations.length === 0) {
-    const noResultsText = isTr 
-      ? 'Aranan kriterlere uygun yer bulunamadı.' 
+    const noResultsText = isTr
+      ? 'Aranan kriterlere uygun yer bulunamadı.'
       : (isRu ? 'Места не найдены.' : 'No locations found matching your filter.');
     container.innerHTML = `
       <div class="text-center py-12 px-4 text-slate-500 dark:text-slate-400 bg-white/50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800">
@@ -411,6 +447,14 @@ function renderCards() {
     return;
   }
 
+  // Compute day-specific sequential stop numbers for all locations
+  const dayStopIndices = {};
+  const dayCounters = { 1: 0, 2: 0, 3: 0 };
+  routeData.locations.forEach(l => {
+    dayCounters[l.day] = (dayCounters[l.day] || 0) + 1;
+    dayStopIndices[l.id] = dayCounters[l.day];
+  });
+
   let html = '';
   filteredLocations.forEach((loc) => {
     const isTr = currentLang === 'tr';
@@ -418,24 +462,27 @@ function renderCards() {
 
     const title = isTr ? loc.nameTr : (isRu ? loc.nameRu : loc.nameEn);
     const tip = isTr ? loc.tipTr : (isRu ? loc.tipRu : loc.tipEn);
+    const stopIndex = dayStopIndices[loc.id] || loc.id;
 
-    const regionName = loc.region === 'europe' 
-      ? (isTr ? 'Avrupa Yakası 🏰' : (isRu ? 'Европейская сторона 🏰' : 'European Side 🏰')) 
+    const regionName = loc.region === 'europe'
+      ? (isTr ? 'Avrupa Yakası 🏰' : (isRu ? 'Европейская сторона 🏰' : 'European Side 🏰'))
       : (isTr ? 'Anadolu Yakası (Kadıköy) 🌊' : (isRu ? 'Азиатская сторона (Кадыкёй) 🌊' : 'Asian Side (Kadıköy) 🌊'));
 
     const catName = loc.category === 'historic'
       ? (isTr ? 'Tarihi & Müze' : (isRu ? 'История и Музей' : 'Historic & Museum'))
       : loc.category === 'food'
-      ? (isTr ? 'Yeme & İçme' : (isRu ? 'Еда и Сладости' : 'Food & Sweets'))
-      : (isTr ? 'Gece Hayatı' : (isRu ? 'Ночная жизнь' : 'Nightlife & Bars'));
+        ? (isTr ? 'Yeme & İçme' : (isRu ? 'Еда и Сладости' : 'Food & Sweets'))
+        : (isTr ? 'Gece Hayatı' : (isRu ? 'Ночная жизнь' : 'Nightlife & Bars'));
 
     const catBadgeColor = loc.category === 'historic'
       ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
       : loc.category === 'food'
-      ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
-      : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+        ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
+        : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
 
-    const dayBadgeText = isTr ? `${loc.day}. GÜN` : (isRu ? `ДЕНЬ ${loc.day}` : `DAY ${loc.day}`);
+    const dayBadgeText = isTr
+      ? `${loc.day}. GÜN • ${stopIndex}. DURAK`
+      : (isRu ? `ДЕНЬ ${loc.day} • №${stopIndex}` : `DAY ${loc.day} • STOP #${stopIndex}`);
 
     html += `
       <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 grid grid-cols-1 md:grid-cols-12 gap-0" id="card-${loc.id}">
@@ -446,7 +493,7 @@ function renderCards() {
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent md:hidden"></div>
           
           <div class="absolute top-3 left-3 w-9 h-9 rounded-full bg-slate-950/80 backdrop-blur-md text-white font-black text-sm flex items-center justify-center border border-white/20 shadow-md">
-            #${loc.id}
+            #${stopIndex}
           </div>
 
           <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-amber-400 font-bold text-xs border border-white/10 shadow-md">
@@ -503,10 +550,10 @@ function renderCards() {
       const t = loc.transitToNext;
       const duration = isTr ? t.durationTr : (isRu ? t.durationRu : t.durationEn);
       const desc = isTr ? t.descTr : (isRu ? t.descRu : t.descEn);
-      
+
       let icon = '🚶';
       let typeLabel = isTr ? 'YÜRÜYÜŞ' : (isRu ? 'ПЕШКОМ' : 'WALK');
-      
+
       if (t.type === 'tram') {
         icon = '🚋';
         typeLabel = isTr ? 'T1 TRAMVAY' : (isRu ? 'ТРАМВАЙ T1' : 'T1 TRAMWAY');
