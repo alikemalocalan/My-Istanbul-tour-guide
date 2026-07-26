@@ -153,13 +153,109 @@ const routeData = {
       tipEn: "Magnificent 6-minaret Ottoman mosque right across Hagia Sophia! Famous for its blue Iznik tiles.\n🎫 Entry: FREE of charge.",
       tipRu: "Великолепная мечеть с 6 минаретами напротив Ая-Софии! Известна своими синими изникскими изразцами.\n🎫 Вход: БЕСПЛАТНО.",
       transitToNext: {
-        type: "tram",
+        type: "walk",
+        durationTr: "5 dk",
+        durationEn: "5 mins",
+        durationRu: "5 мин",
+        descTr: "Divanyolu Caddesi boyunca Çemberlitaş yönüne, Çorlulu Ali Paşa Medresesi'ne yürüyün.",
+        descEn: "Walk along Divanyolu Street towards Çemberlitaş to Çorlulu Ali Paşa Medrese.",
+        descRu: "Идите по улице Диваньолу к медресе Чорлулу Али Паша."
+      }
+    },
+    {
+      id: 27,
+      day: 1,
+      nameTr: "Çorlulu Ali Paşa Medresesi Çay Ocağı",
+      nameEn: "Corlulu Ali Pasa Medrese Tea House",
+      nameRu: "Медресе Чорлулу Али Паша (Чайхана)",
+      category: "food",
+      region: "europe",
+      coordinates: [41.0089, 28.9684],
+      mapsUrl: "https://maps.google.com/?q=Corlulu+Ali+Pasa+Medresesi+Istanbul",
+      image: "images/corlulu_alipasa.jpg",
+      tipTr: "Tarihi 18. yüzyıl medresesinin otantik avlusunda harika bir ara durak! Sultanahmet ve Ayasofya gezilerinden sonra taze demlenmiş Türk çayı içip dinlenmek için son derece keyifli bir mekandır.",
+      tipEn: "An authentic rest stop in the courtyard of an 18th-century historic medrese! Perfect, peaceful spot to relax and enjoy freshly brewed Turkish tea after visiting Sultanahmet & Hagia Sophia.",
+      tipRu: "Аутентичная чайхана во дворике исторического медресе 18 века! Идеальное место для отдыха и свежезаваренного турецкого чая.",
+      transitToNext: {
+        type: "walk",
+        durationTr: "3 dk",
+        durationEn: "3 mins",
+        durationRu: "3 мин",
+        descTr: "Beyazıt Meydanı'na doğru yürüyerek İstanbul Üniversitesi Ana Kapısı'nı görün.",
+        descEn: "Walk towards Beyazıt Square to see the Istanbul University Main Gate.",
+        descRu: "Пройдите к площади Беязыт к главным воротам Стамбульского университета."
+      }
+    },
+    {
+      id: 28,
+      day: 1,
+      nameTr: "İstanbul Üniversitesi Beyazıt Ana Kapısı",
+      nameEn: "Istanbul University Main Gate (Beyazıt)",
+      nameRu: "Главные ворота Стамбульского университета (Беязыт)",
+      category: "historic",
+      region: "europe",
+      coordinates: [41.0128, 28.9631],
+      mapsUrl: "https://maps.google.com/?q=Istanbul+University+Beyazit+Gate",
+      image: "images/istanbul_universitesi.jpg",
+      tipTr: "Türkiye'nin en köklü ve tarihi üniversitesinin meşhur Beyazıt Meydanı'ndaki görkemli tarihi kapısı. (Canım üniversitem ❤️)",
+      tipEn: "The magnificent historic main entrance gate of Turkey's oldest university located at Beyazıt Square. (Canım üniversitem ❤️)",
+      tipRu: "Роскошные исторические ворота старейшего университета Турции на площади Беязыт. (Canım üniversitem ❤️)",
+      transitToNext: {
+        type: "walk",
+        durationTr: "2 dk",
+        durationEn: "2 mins",
+        durationRu: "2 мин",
+        descTr: "Meydanın hemen yanındaki Beyazıt/Nuruosmaniye kapısından Kapalıçarşı'ya girin.",
+        descEn: "Enter the Grand Bazaar right next to the square via Beyazıt/Nuruosmaniye gate.",
+        descRu: "Войдите в Гранд-базар через ворота Беязыт/Нуруосмание прямо рядом с площадью."
+      }
+    },
+    {
+      id: 26,
+      day: 1,
+      nameTr: "Kapalıçarşı (Tarihi Çarşı)",
+      nameEn: "Grand Bazaar (Kapalıçarşı)",
+      nameRu: "Гранд-базар (Капалы-чарши)",
+      category: "historic",
+      region: "europe",
+      coordinates: [41.0107, 28.9680],
+      mapsUrl: "https://maps.google.com/?q=Grand+Bazaar+Istanbul",
+      image: "images/kapalicarsi.jpg",
+      tipTr: "Dünyanın en eski ve en büyük kapalı çarşılarından biri. ÖNEMLİ İPUCU: Burası esas olarak kuyumcular (altın/takı) ve uygun kurla döviz bozdurmak için idealdir. Mağazalarda pek fazla orijinal ve kaliteli marka ürün bulunmaz, kıyafet/çanta alışverişi için çok tavsiye edilmez.\n🛍️ Giriş Ücreti: ÜCRETSİZ.",
+      tipEn: "One of the oldest and largest covered markets in the world. PRO TIP: Mainly ideal for gold/jewelry shops and favorable currency exchange. Note that there aren't really original or high-quality brand items here; not recommended for luxury fashion shopping.\n🛍️ Entry: FREE of charge.",
+      tipRu: "Один из старейших и крупнейших крытых рынков в мире. СОВЕТ: В основном идеален для ювелирных магазинов (золото) и выгодного обмена валюты. Заметьте, что оригинальных брендовых вещей высокого качества здесь почти нет.\n🛍️ Вход: БЕСПЛАТНО.",
+      transitToNext: {
+        type: "walk",
+        durationTr: "8-10 dk",
+        durationEn: "8-10 mins",
+        durationRu: "8-10 мин",
+        descTr: "Mahmutpaşa yokuşundan aşağıya doğru Mısır Çarşısı'na (Eminönü) yürüyün.",
+        descEn: "Walk down Mahmutpasa slope towards Spice Bazaar (Eminonu).",
+        descRu: "Спуститесь по склону Махмутпаша к Египетскому базару (Эминёню)."
+      }
+    },
+    {
+      id: 25,
+      day: 1,
+      nameTr: "Mısır Çarşısı (Tarihi Baharatçılar Çarşısı)",
+      nameEn: "Spice Bazaar (Egyptian Bazaar)",
+      nameRu: "Египетский базар (Базар специй)",
+      category: "historic",
+      region: "europe",
+      coordinates: [41.0164, 28.9706],
+      mapsUrl: "https://maps.google.com/?q=Spice+Bazaar+Istanbul",
+      image: "images/misir_carsisi.jpg",
+      tipTr: "İstanbul'un en renkli ve mis kokulu tarihi çarşısı. Hediyelik geleneksel Türk lokumu almak için mükemmel bir durak (Özellikle 'Malatya Pazarı' markası favorimizdir!). Rengarenk baharatlar, kuruyemişler ve hediyelikler sunar.\n🛍️ Giriş Ücreti: ÜCRETSİZ.",
+      tipEn: "One of Istanbul's most colorful and aromatic historic markets. Perfect spot to buy gift Turkish Delights (Especially the 'Malatya Pazarı' brand is a personal favorite!). Filled with vibrant spices, nuts, teas, and souvenirs.\n🛍️ Entry: FREE of charge.",
+      tipRu: "Один из самых ярких и ароматных исторических рынков Стамбула. Отличное место для покупки сувенирного турецкого рахат-лукума (Особенно бренд 'Malatya Pazarı' — наш фаворит!).\n🛍️ Вход: БЕСПЛАТНО.",
+      transitToNext: {
+        type: "walk",
         durationTr: "8 dk",
         durationEn: "8 mins",
         durationRu: "8 мин",
-        descTr: "T1 Tramvayına (Sultanahmet durağı) binip Galata Köprüsü'nü geçerek Karaköy durağında inin.",
-        descEn: "Board T1 Tramway at Sultanahmet, cross Galata Bridge, and get off at Karakoy station.",
-        descRu: "Сядьте на трамвай T1 на станции Султанахмет, переедьте Галатский мост и сойдите на Каракёй."
+        descTr: "Galata Köprüsü üzerinden yürüyerek veya 1 durak tramvay ile Karaköy Güllüoğlu'na geçin.",
+        descEn: "Walk across Galata Bridge or take T1 tram 1 stop to Karakoy Gulluoglu.",
+        descRu: "Пройдите по Галатскому мосту пешком или проедьте 1 остановку на трамвае до Karakoy Gulluoglu."
       }
     },
     {
