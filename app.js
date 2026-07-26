@@ -234,10 +234,12 @@ function renderHeaderAndModal() {
   setText('stat-label-3', isTr ? 'Ulaşım Araçları' : (isRu ? 'Вида транспорта' : 'Transit Modes'));
 
   setText('tips-btn-text', isTr ? '💡 İstanbulkart & Ulaşım İpuçları' : (isRu ? '💡 Транспорт и советы' : '💡 Transport & Local Tips'));
+  setText('tips-btn-text-compact', isTr ? '💡 İpuçları' : (isRu ? '💡 Советы' : '💡 Local Tips'));
 
   // Day Selector Labels
+  const totalCount = routeData.locations.length;
   setText('day-select-label', isTr ? '🗓️ GÜN SEÇİMİ:' : (isRu ? '🗓️ ВЫБОР ДНЯ:' : '🗓️ SELECT DAY:'));
-  setText('day-all', isTr ? 'Tüm Günler (21 Durak)' : (isRu ? 'Все дни (21)' : 'All Days (21)'));
+  setText('day-all', isTr ? `Tüm Günler (${totalCount} Durak)` : (isRu ? `Все дни (${totalCount})` : `All Days (${totalCount})`));
   setText('day-1', daysText.day1);
   setText('day-2', daysText.day2);
   setText('day-3', daysText.day3);
