@@ -272,30 +272,6 @@ const routeData = {
       tipTr: "Baklavayı icat eden / dünyada baklavanın simgesi olan yer! Türkiye'nin en iyi, en kaliteli ve en havalı baklavacısıdır. Buraya uğramadan İstanbul turu tamamlanmaz.",
       tipEn: "The iconic place that invented / perfected baklava! The coolest and best baklava shop in all of Turkey. Absolutely mandatory stop!",
       tipRu: "Культовое место, где создали лучшую пахлаву! Самая лучшая и стильная кондитерская пахлавы в Турции.",
-      transitToNext: {
-        type: "walk",
-        durationTr: "2 dk",
-        durationEn: "2 mins",
-        durationRu: "2 мин",
-        descTr: "Karaköy sokakları içindeki Baltazar Burger'e yürüyün.",
-        descEn: "Walk into Karakoy streets to Baltazar Burger.",
-        descRu: "Пройдите по улочкам Каракёя к Baltazar Burger."
-      }
-    },
-    {
-      id: 7,
-      day: 1,
-      nameTr: "Baltazar Burger & Grill (Karaköy)",
-      nameEn: "Baltazar Burger & Grill (Karakoy)",
-      nameRu: "Baltazar Burger & Grill (Каракёй)",
-      category: "food",
-      region: "europe",
-      coordinates: [41.024100, 28.975800],
-      mapsUrl: "https://maps.google.com/?q=Baltazar+Karakoy+Istanbul",
-      image: "images/zapato_burger.jpg",
-      tipTr: "Karaköy'ün en popüler burger ve ızgara mekanı (Eski adıyla Zapato Burger)! Açık hava bahçesi ve leziz burgerleriyle Karaköy'ün vazgeçilmez mekanlarındandır.",
-      tipEn: "One of Karakoy's coolest burger & grill spots (formerly Zapato Burger)! Amazing outdoor garden and top-tier burgers in town.",
-      tipRu: "Одно из лучших заведений с бургерами и грилем в Каракёе (ранее Zapato Burger)! Отличный открытый сад и вкуснейшие бургеры.",
       transitToNext: null
     },
 
