@@ -376,12 +376,19 @@ function renderHeaderAndModal() {
   // Modal Content
   setText('modal-istanbulkart-title', tips.istanbulkartTitle);
   setText('modal-istanbulkart-body', tips.istanbulkartBody);
+  setText('modal-museumpass-title', tips.museumPassTitle);
+  setText('modal-museumpass-body', tips.museumPassBody);
   setText('modal-taxi-title', tips.taxiTitle);
   setText('modal-taxi-body', tips.taxiBody);
 
   const appLink = document.getElementById('modal-app-link');
   if (appLink) {
     appLink.innerText = tips.appLinkText;
+  }
+
+  const passLink = document.getElementById('modal-museumpass-link');
+  if (passLink) {
+    passLink.innerText = tips.museumPassLinkText;
   }
 }
 
@@ -484,6 +491,38 @@ function renderCards() {
       ? `${loc.day}. GÜN • ${stopIndex}. DURAK`
       : (isRu ? `ДЕНЬ ${loc.day} • №${stopIndex}` : `DAY ${loc.day} • STOP #${stopIndex}`);
 
+    let museumPassBadgeHtml = '';
+    if (loc.museumPassStatus) {
+      if (loc.museumPassStatus === 'valid') {
+        const passText = isTr
+          ? '✅ Museum Pass İstanbul: GEÇERLİ'
+          : (isRu ? '✅ Museum Pass İstanbul: ДЕЙСТВИТЕЛЕН' : '✅ Museum Pass İstanbul: VALID');
+        museumPassBadgeHtml = `
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+            ${passText}
+          </span>
+        `;
+      } else if (loc.museumPassStatus === 'invalid') {
+        const passText = isTr
+          ? '❌ Museum Pass: GEÇERLİ DEĞİLDİR'
+          : (isRu ? '❌ Museum Pass: НЕ ДЕЙСТВИТЕЛЕН' : '❌ Museum Pass: NOT VALID');
+        museumPassBadgeHtml = `
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30">
+            ${passText}
+          </span>
+        `;
+      } else if (loc.museumPassStatus === 'free') {
+        const passText = isTr
+          ? '🆓 Ücretsiz Giriş (Museum Pass Gerekmez)'
+          : (isRu ? '🆓 Вход бесплатный (Museum Pass не нужен)' : '🆓 Free Entry (Museum Pass Not Needed)');
+        museumPassBadgeHtml = `
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30">
+            ${passText}
+          </span>
+        `;
+      }
+    }
+
     html += `
       <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 grid grid-cols-1 md:grid-cols-12 gap-0" id="card-${loc.id}">
         
@@ -508,11 +547,12 @@ function renderCards() {
         <!-- Content Column -->
         <div class="md:col-span-7 p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center flex-wrap gap-2 mb-2">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border ${catBadgeColor}">
                 ${catName}
               </span>
-              <span class="hidden md:inline-flex text-xs font-semibold text-slate-500 dark:text-slate-400">
+              ${museumPassBadgeHtml}
+              <span class="hidden md:inline-flex text-xs font-semibold text-slate-500 dark:text-slate-400 ml-auto">
                 ${regionName}
               </span>
             </div>
